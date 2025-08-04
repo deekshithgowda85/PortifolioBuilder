@@ -1,4 +1,5 @@
 import { DropZone, type Config } from "@measured/puck";
+import {useState} from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -45,286 +46,105 @@ import { Toggle } from "@/components/ui/toggle";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Toaster } from "@/components/ui/sonner";
 import { ChartContainer } from "@/components/ui/chart";
-
-type Props = {
-HeadingBlock: {
-  title: string;
-  level: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
-  fontSize: number;
-  fontWeight: "300" | "400" | "500" | "600" | "700" | "800" | "900";
-  fontFamily: "default" | "serif" | "sans-serif" | "monospace" | "cursive";
-  color: string;
-  textAlign: "left" | "center" | "right" | "justify";
-  textTransform: "none" | "uppercase" | "lowercase" | "capitalize";
-  letterSpacing: number;
-  lineHeight: number;
-  textShadow: boolean;
-  shadowColor: string;
-  shadowBlur: number;
-  shadowOffsetX: number;
-  shadowOffsetY: number;
-  backgroundColor: string;
-  padding: number;
-  margin: number;
-  borderRadius: number;
-  border: boolean;
-  borderColor: string;
-  borderWidth: number;
-  borderStyle: "solid" | "dashed" | "dotted" | "double";
-  gradient: boolean;
-  gradientStart: string;
-  gradientEnd: string;
-  gradientDirection: "to-r" | "to-l" | "to-t" | "to-b" | "to-tr" | "to-br" | "to-bl" | "to-tl";
-  animation: "none" | "fade-in" | "slide-up" | "bounce" | "pulse" | "glow";
-  maxWidth: number;
-  responsive: boolean;
-};
-
-  GridBlock:{
-    columns: number
-    gap: number
-   };
-    OverlayBlock: {
-    height: number;
-    backgroundColor: string;
-  };
-  LayeredBlock: {
-    layers: number;
-    spacing: number;
-  };
-  HeroOverlayBlock: {
-    backgroundImage: string;
-    overlayOpacity: number;
-    minHeight: number;
-  }; 
-  ButtonBlock: {
-    text: string;
-    variant: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
-    size: "default" | "sm" | "lg" | "icon";
-  };
-  CardBlock: {
-    title: string;
-    description: string;
-    content: string;
-  };
-  BadgeBlock: {
-    text: string;
-    variant: "default" | "secondary" | "destructive" | "outline";
-  };
-  AlertBlock: {
-    title: string;
-    description: string;
-    variant: "default" | "destructive";
-  };
-  AccordionBlock: {
-    item1Title: string;
-    item1Content: string;
-    item2Title: string;
-    item2Content: string;
-    item3Title: string;
-    item3Content: string;
-  };
-  InputBlock: {
-    placeholder: string;
-    type: "text" | "email" | "password" | "number" | "tel" | "url";
-    label: string;
-  };
-  SeparatorBlock: {
-    orientation: "horizontal" | "vertical";
-  };
-  TabsBlock: {
-    tab1Title: string;
-    tab1Content: string;
-    tab2Title: string;
-    tab2Content: string;
-    tab3Title: string;
-    tab3Content: string;
-  };
-  TextareaBlock: {
-    placeholder: string;
-    label: string;
-    rows: number;
-  };
-  SwitchBlock: {
-    label: string;
-    description: string;
-  };
-  CheckboxBlock: {
-    label: string;
-    description: string;
-  };
-  RadioGroupBlock: {
-    label: string;
-    option1: string;
-    option2: string;
-    option3: string;
-  };
-  SliderBlock: {
-    label: string;
-    min: number;
-    max: number;
-    step: number;
-    defaultValue: number;
-  };
-  ProgressBlock: {
-    value: number;
-    label: string;
-  };
-  SkeletonBlock: {
-    type: "text" | "avatar" | "button" | "card";
-  };
-  AvatarBlock: {
-    src: string;
-    alt: string;
-    fallback: string;
-  };
-  AspectRatioBlock: {
-    ratio: number;
-    src: string;
-    alt: string;
-  };
-  CollapsibleBlock: {
-    trigger: string;
-    content: string;
-  };
-  DialogBlock: {
-    trigger: string;
-    title: string;
-    description: string;
-    content: string;
-  };
-  DrawerBlock: {
-    trigger: string;
-    title: string;
-    description: string;
-    content: string;
-  };
-  SheetBlock: {
-    trigger: string;
-    title: string;
-    description: string;
-    content: string;
-  };
-  PopoverBlock: {
-    trigger: string;
-    content: string;
-  };
-  HoverCardBlock: {
-    trigger: string;
-    content: string;
-  };
-  TooltipBlock: {
-    trigger: string;
-    content: string;
-  };
-  SelectBlock: {
-    label: string;
-    placeholder: string;
-    option1: string;
-    option2: string;
-    option3: string;
-  };
-  LabelBlock: {
-    text: string;
-    htmlFor: string;
-  };
-  BreadcrumbBlock: {
-    item1: string;
-    item2: string;
-    item3: string;
-  };
-  CalendarBlock: {
-    mode: "single" | "multiple" | "range";
-  };
-  CarouselBlock: {
-    item1: string;
-    item2: string;
-    item3: string;
-  };
-  TableBlock: {
-    header1: string;
-    header2: string;
-    header3: string;
-    row1col1: string;
-    row1col2: string;
-    row1col3: string;
-    row2col1: string;
-    row2col2: string;
-    row2col3: string;
-  };
-  PaginationBlock: {
-    totalPages: number;
-  };
-  NavigationMenuBlock: {
-    item1: string;
-    item2: string;
-    item3: string;
-  };
-  MenubarBlock: {
-    menu1: string;
-    menu2: string;
-    menu3: string;
-  };
-  CommandBlock: {
-    placeholder: string;
-  };
-  ContextMenuBlock: {
-    trigger: string;
-    item1: string;
-    item2: string;
-  };
-  DropdownMenuBlock: {
-    trigger: string;
-    item1: string;
-    item2: string;
-  };
-  AlertDialogBlock: {
-    trigger: string;
-    title: string;
-    description: string;
-  };
-  FormBlock: {
-    title: string;
-    description: string;
-  };
-  InputOTPBlock: {
-    length: number;
-    label: string;
-  };
-  ScrollAreaBlock: {
-    content: string;
-    height: number;
-  };
-  ResizableBlock: {
-    panel1Title: string;
-    panel2Title: string;
-    panel1Content: string;
-    panel2Content: string;
-  };
-  SidebarBlock: {
-    title: string;
-    item1: string;
-    item2: string;
-    item3: string;
-  };
-  ToggleBlock: {
-    label: string;
-  };
-  ToggleGroupBlock: {
-    label: string;
-    option1: string;
-    option2: string;
-    option3: string;
-  };
-  ChartBlock: {
-    type: "line" | "bar" | "area" | "pie";
-    title: string;
-  };
-
-};
+import { type Props } from "./types";
+import Galaxy  from "@/components/Backgrounds/Galaxy/Galaxy";
 
 export const config: Config<Props> = {
   components: {
+    BackgroundBlock : {
+  fields: {
+    type: {
+      type: "select",
+      options: [
+        { label: "None", value: "none" },
+        { label: "Galaxy", value: "galaxy" },
+      ],
+    },
+    mouseRepulsion: {
+      type: "select",
+      options: [
+        { label: "True", value: true },
+        { label: "False", value: false },
+      ],
+    },
+    mouseInteraction: {
+      type: "select",
+      options: [
+        { label: "True", value: true },
+        { label: "False", value: false },
+      ],
+    },
+    density: { type: "number" },
+    glowIntensity: { type: "number" },
+    saturation: { type: "number" },
+    hueShift: { type: "number" },
+  },
+  defaultProps: {
+    type: "galaxy",
+    mouseRepulsion: true,
+    mouseInteraction: true,
+    density: 1.5,
+    glowIntensity: 0.5,
+    saturation: 0.8,
+    hueShift: 240,
+  },
+  render: ({
+  type,
+  mouseRepulsion,
+  mouseInteraction,
+  density,
+  glowIntensity,
+  saturation,
+  hueShift,
+}) => {
+  return (
+    <div
+   style={{
+        position: "relative",
+    width: "100%",
+    minHeight: "100vh",
+    overflow: "visible",
+        backgroundColor: "#000", 
+      }}
+    >
+    {type === "galaxy" && (
+      <Galaxy
+        mouseRepulsion={false}
+        mouseInteraction={false}
+        density={density ?? 1.5}
+        glowIntensity={glowIntensity ?? 0.5}
+        saturation={saturation ?? 0.8}
+        hueShift={hueShift ?? 240}
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          zIndex: 0,
+          backgroundColor: "#000",     // ✅ ensure deep black canvas
+        }}
+      />
+    )}
+
+    <DropZone
+      zone="background-content"
+      style={{
+        position: "relative",         // ✅ make DropZone part of flow
+        zIndex: 1,
+        display: "flex",
+        flexDirection: "column",      // 👈 change to "row" if needed
+        alignItems: "flex-center",
+        justifyContent: "start",
+        padding: "40px",
+        gap: "20px",
+        width: "100%",
+      }}
+    />
+  </div>
+);
+},
+    },
    HeadingBlock: {
   fields: {
     title: { type: "text" },
@@ -1624,27 +1444,6 @@ export const config: Config<Props> = {
         </div>
       ),
     },
-    CalendarBlock: {
-      fields: {
-        mode: {
-          type: "select",
-          options: [
-            { label: "Single", value: "single" },
-            { label: "Multiple", value: "multiple" },
-            { label: "Range", value: "range" },
-          ],
-        },
-      },
-      defaultProps: {
-        mode: "single",
-      },
-  render: ({ mode: ModeComponent }) => (
-  <div style={{ padding: 16 }}>
-    <ModeComponent className="rounded-md border" selected={new Date()} />
-  </div>
-)
-,
-    },
     CarouselBlock: {
       fields: {
         item1: { type: "text" },
@@ -2216,6 +2015,7 @@ export const config: Config<Props> = {
         </div>
       ),
     },
+
   },
 };
 
