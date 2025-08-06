@@ -1,205 +1,261 @@
 type Props = {
-BackgroundBlock: {
-  type: "none" | "galaxy";
-  mouseRepulsion: boolean;
-  mouseInteraction: boolean;
-  density: number;
-  glowIntensity: number;
-  saturation: number;
-  hueShift: number;
+Background: {
+  type: "none" | "galaxy" | "particles";
+  backgroundColor?: string;
+  gradient?: boolean;
+  gradientStart?: string;
+  gradientEnd?: string;
+  gradientDirection?: "to right" | "to left" | "to bottom" | "to top" | "to top right" | "to bottom right" | "to bottom left" | "to top left";
+  mouseRepulsion?: boolean;
+  mouseInteraction?: boolean;
+  density?: number;
+  glowIntensity?: number;
+  saturation?: number;
+  hueShift?: number;
+  particleCount?: number;
+  particleSpeed?: number;
+  particleSize?: number;
 };
-HeadingBlock: {
-  title: string;
-  level: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
-  fontSize: number;
-  fontWeight: "300" | "400" | "500" | "600" | "700" | "800" | "900";
-  fontFamily: "default" | "serif" | "sans-serif" | "monospace" | "cursive";
-  color: string;
-  textAlign: "left" | "center" | "right" | "justify";
-  textTransform: "none" | "uppercase" | "lowercase" | "capitalize";
-  letterSpacing: number;
-  lineHeight: number;
-  textShadow: boolean;
-  shadowColor: string;
-  shadowBlur: number;
-  shadowOffsetX: number;
-  shadowOffsetY: number;
-  backgroundColor: string;
-  padding: number;
-  margin: number;
-  borderRadius: number;
-  border: boolean;
-  borderColor: string;
-  borderWidth: number;
-  borderStyle: "solid" | "dashed" | "dotted" | "double";
-  gradient: boolean;
-  gradientStart: string;
-  gradientEnd: string;
-  gradientDirection: "to-r" | "to-l" | "to-t" | "to-b" | "to-tr" | "to-br" | "to-bl" | "to-tl";
-  animation: "none" | "fade-in" | "slide-up" | "bounce" | "pulse" | "glow";
-  maxWidth: number;
-  responsive: boolean;
-};
+  Heading: {
+    title: string;
+    level: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+    fontSize: number;
+    fontWeight: "300" | "400" | "500" | "600" | "700" | "800" | "900";
+    fontFamily: "default" | "serif" | "sans-serif" | "monospace" | "cursive";
+    color: string;
+    textAlign: "left" | "center" | "right" | "justify";
+    textTransform: "none" | "uppercase" | "lowercase" | "capitalize";
+    letterSpacing: number;
+    lineHeight: number;
+    textShadow: boolean;
+    shadowColor: string;
+    shadowBlur: number;
+    shadowOffsetX: number;
+    shadowOffsetY: number;
+    backgroundColor: string;
+    padding: number;
+    margin: number;
+    borderRadius: number;
+    border: boolean;
+    borderColor: string;
+    borderWidth: number;
+    borderStyle: "solid" | "dashed" | "dotted" | "double";
+    gradient: boolean;
+    gradientStart: string;
+    gradientEnd: string;
+    gradientDirection: "to-r" | "to-l" | "to-t" | "to-b" | "to-tr" | "to-br" | "to-bl" | "to-tl";
+    animation: "none" | "fade-in" | "slide-up" | "bounce" | "pulse" | "glow";
+    maxWidth: number;
+    responsive: boolean;
+    // GSAP Animation Options (for future use)
+    gsapAnimation?: "fade" | "slide" | "typewriter" | "reveal" | "none";
+  };
 
-  GridBlock:{
+  Grid:{
     columns: number
     gap: number
    };
-    OverlayBlock: {
+    Overlay: {
     height: number;
-    backgroundColor: string;
+  width?: number;
+  opacity?: number;
+  backgroundColor: string;
+  align?: "left" | "center" | "right";
+  gap?: number;
   };
-  LayeredBlock: {
-    layers: number;
-    spacing: number;
-  };
-  HeroOverlayBlock: {
+  HeroOverlay: {
     backgroundImage: string;
     overlayOpacity: number;
     minHeight: number;
+    // GSAP Animation Options (for future use)
+    gsapAnimation?: "parallax" | "zoom" | "layered" | "none";
   }; 
-  ButtonBlock: {
+  Button: {
     text: string;
     variant: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
     size: "default" | "sm" | "lg" | "icon";
+    align: "left" | "center" | "right";
+    backgroundColor?: string;
+    textColor?: string;
+    width?: number;
+    height?: number;
+    // GSAP Animation Options (for future use)
+    gsapAnimation?: "magnetic" | "pulse" | "shake" | "bounce" | "none";
   };
-  CardBlock: {
+  Card: {
     title: string;
     description: string;
     content: string;
+    align: "left" | "center" | "right";
+    backgroundColor?: string;
+    textColor?: string;
+    width?: number;
+    height?: number;
+    // GSAP Animation Options (for future use)
+    gsapAnimation?: "slideUp" | "scale" | "flip" | "stagger" | "none";
   };
-  BadgeBlock: {
+  CardCarousel: {
+    images: {
+      src: string;
+      file?: string | null;
+      alt: string;
+    }[];
+    autoplayDelay: number;
+    showPagination: boolean;
+    showNavigation: boolean;
+    align: "left" | "center" | "right";
+    backgroundColor?: string;
+    width?: number;
+    height?: number;
+  };
+  Badge: {
     text: string;
     variant: "default" | "secondary" | "destructive" | "outline";
+    align: "left" | "center" | "right";
+    backgroundColor?: string;
+    textColor?: string;
   };
-  AlertBlock: {
+  Alert: {
     title: string;
     description: string;
     variant: "default" | "destructive";
+    align: "left" | "center" | "right";
+    backgroundColor?: string;
+    textColor?: string;
+    width?: number;
   };
-  AccordionBlock: {
+  Accordion: {
     item1Title: string;
     item1Content: string;
     item2Title: string;
     item2Content: string;
     item3Title: string;
     item3Content: string;
+    align: "left" | "center" | "right";
+    backgroundColor?: string;
+    textColor?: string;
+    width?: number;
   };
-  InputBlock: {
+  Input: {
     placeholder: string;
     type: "text" | "email" | "password" | "number" | "tel" | "url";
     label: string;
+    align: "left" | "center" | "right";
+    backgroundColor?: string;
+    textColor?: string;
+    width?: number;
   };
-  SeparatorBlock: {
+  Separator: {
     orientation: "horizontal" | "vertical";
   };
-  TabsBlock: {
-    tab1Title: string;
-    tab1Content: string;
-    tab2Title: string;
-    tab2Content: string;
-    tab3Title: string;
-    tab3Content: string;
-  };
-  TextareaBlock: {
+  Textarea: {
     placeholder: string;
     label: string;
     rows: number;
+    align: "left" | "center" | "right";
+    backgroundColor?: string;
+    textColor?: string;
+    width?: number;
+    height?: number;
   };
-  SwitchBlock: {
+  Switch: {
     label: string;
     description: string;
+    align: "left" | "center" | "right";
+    backgroundColor?: string;
+    textColor?: string;
+    width?: number;
   };
-  CheckboxBlock: {
+  Checkbox: {
     label: string;
     description: string;
+    align: "left" | "center" | "right";
+    backgroundColor?: string;
+    textColor?: string;
+    width?: number;
   };
-  RadioGroupBlock: {
+  RadioGroup: {
     label: string;
     option1: string;
     option2: string;
     option3: string;
+    align: "left" | "center" | "right";
+    backgroundColor?: string;
+    textColor?: string;
+    width?: number;
   };
-  SliderBlock: {
-    label: string;
-    min: number;
-    max: number;
-    step: number;
-    defaultValue: number;
-  };
-  ProgressBlock: {
-    value: number;
-    label: string;
-  };
-  SkeletonBlock: {
+  Skeleton: {
     type: "text" | "avatar" | "button" | "card";
   };
-  AvatarBlock: {
+  Avatar: {
     src: string;
     alt: string;
     fallback: string;
+    align: "left" | "center" | "right";
+    backgroundColor?: string;
+    width?: number;
+    height?: number;
   };
-  AspectRatioBlock: {
-    ratio: number;
+  Image: {
     src: string;
+    file?: string | null; // Now stores URL string instead of File object
     alt: string;
+    width?: number;
+    height?: number;
+    align?: "left" | "center" | "right";
+    opacity?: number;
+    // GSAP Animation Options (for future use)
+    gsapAnimation?: "parallax" | "zoom" | "reveal" | "clipPath" | "none";
   };
-  CollapsibleBlock: {
+  Collapsible: {
     trigger: string;
     content: string;
   };
-  DialogBlock: {
-    trigger: string;
-    title: string;
-    description: string;
-    content: string;
-  };
-  DrawerBlock: {
-    trigger: string;
-    title: string;
-    description: string;
-    content: string;
-  };
-  SheetBlock: {
+  Dialog: {
     trigger: string;
     title: string;
     description: string;
     content: string;
   };
-  PopoverBlock: {
+  Drawer: {
+    trigger: string;
+    title: string;
+    description: string;
+    content: string;
+  };
+  Sheet: {
+    trigger: string;
+    title: string;
+    description: string;
+    content: string;
+  };
+  Popover: {
     trigger: string;
     content: string;
   };
-  HoverCardBlock: {
+  HoverCard: {
     trigger: string;
     content: string;
   };
-  TooltipBlock: {
+  Tooltip: {
     trigger: string;
     content: string;
   };
-  SelectBlock: {
-    label: string;
-    placeholder: string;
-    option1: string;
-    option2: string;
-    option3: string;
-  };
-  LabelBlock: {
+  Label: {
     text: string;
     htmlFor: string;
   };
-  BreadcrumbBlock: {
+  Carousel: {
     item1: string;
     item2: string;
     item3: string;
+    align: "left" | "center" | "right";
+    backgroundColor?: string;
+    textColor?: string;
+    width?: number;
+    height?: number;
   };
-  CarouselBlock: {
-    item1: string;
-    item2: string;
-    item3: string;
-  };
-  TableBlock: {
+  Table: {
     header1: string;
     header2: string;
     header3: string;
@@ -209,75 +265,61 @@ HeadingBlock: {
     row2col1: string;
     row2col2: string;
     row2col3: string;
+    align: "left" | "center" | "right";
+    backgroundColor?: string;
+    textColor?: string;
+    width?: number;
   };
-  PaginationBlock: {
+  Pagination: {
     totalPages: number;
   };
-  NavigationMenuBlock: {
+  NavigationMenu: {
+    title: string; 
     item1: string;
     item2: string;
     item3: string;
+    align: "left" | "center" | "right" | "space-between";
+    backgroundColor?: string;
+    textColor?: string;
+    width?: number;
+    height?: number;
   };
-  MenubarBlock: {
+  Menubar: {
     menu1: string;
     menu2: string;
     menu3: string;
   };
-  CommandBlock: {
+  Command: {
     placeholder: string;
   };
-  ContextMenuBlock: {
+  DropdownMenu: {
     trigger: string;
     item1: string;
     item2: string;
   };
-  DropdownMenuBlock: {
-    trigger: string;
-    item1: string;
-    item2: string;
-  };
-  AlertDialogBlock: {
+  AlertDialog: {
     trigger: string;
     title: string;
     description: string;
   };
-  FormBlock: {
+  Form: {
     title: string;
     description: string;
+    align: "left" | "center" | "right";
+    backgroundColor?: string;
+    textColor?: string;
+    width?: number;
+    height?: number;
   };
-  InputOTPBlock: {
-    length: number;
-    label: string;
-  };
-  ScrollAreaBlock: {
+  ScrollArea: {
     content: string;
     height: number;
+    align: "left" | "center" | "right";
+    backgroundColor?: string;
+    textColor?: string;
+    width?: number;
   };
-  ResizableBlock: {
-    panel1Title: string;
-    panel2Title: string;
-    panel1Content: string;
-    panel2Content: string;
-  };
-  SidebarBlock: {
-    title: string;
-    item1: string;
-    item2: string;
-    item3: string;
-  };
-  ToggleBlock: {
-    label: string;
-  };
-  ToggleGroupBlock: {
-    label: string;
-    option1: string;
-    option2: string;
-    option3: string;
-  };
-  ChartBlock: {
-    type: "line" | "bar" | "area" | "pie";
-    title: string;
-  };
+
 
 };
  export type { Props };
