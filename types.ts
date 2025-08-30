@@ -1,6 +1,6 @@
 type Props = {
 Background: {
-  type: "none" | "galaxy" | "particles";
+  type: "none";
   backgroundColor?: string;
   gradient?: boolean;
   gradientStart?: string;
@@ -12,9 +12,7 @@ Background: {
   glowIntensity?: number;
   saturation?: number;
   hueShift?: number;
-  particleCount?: number;
-  particleSpeed?: number;
-  particleSize?: number;
+
 };
   Heading: {
     title: string;

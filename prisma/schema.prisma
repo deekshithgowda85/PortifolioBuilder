@@ -1,0 +1,20 @@
+// Prisma schema for user pages with Clerk integration
+// Update the provider and url as needed
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model Page {
+    id     Int    @id @default(autoincrement())
+    userId String // Clerk user ID
+    path   String
+    data   Json
+
+    @@unique([userId, path])
+}

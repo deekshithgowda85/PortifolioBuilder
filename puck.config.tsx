@@ -31,8 +31,6 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSepara
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { type Props } from "./types";
-import Galaxy  from "@/components/Backgrounds/Galaxy/Galaxy";
-import Particles from "@/components/Backgrounds/Particles/Particles";
 import {CardCarousel } from "@/components/ui/card-carousel";
 import { HeadingComponent } from "@/components/ui/heading-component"
 import Image from "next/image";
@@ -47,14 +45,11 @@ export const config: Config<Props> = {
           type: "select",
           options: [
             { label: "None", value: "none" },
-            { label: "Galaxy", value: "galaxy" },
-            { label: "Particles", value: "particles" },
           ],
         },
-        // Background Color and Gradient for "none" option
         backgroundColor: { 
           type: "text", 
-          label: "Background Color (None Type)"
+          label: "Background Color"
         },
         gradient: {
           type: "radio",
@@ -62,19 +57,19 @@ export const config: Config<Props> = {
             { label: "Yes", value: true },
             { label: "No", value: false },
           ],
-          label: "Enable Gradient (None Type)"
+          label: "Enable Gradient"
         },
         gradientStart: { 
           type: "text", 
-          label: "Gradient Start Color (None Type)"
+          label: "Gradient Start Color"
         },
         gradientEnd: { 
           type: "text", 
-          label: "Gradient End Color (None Type)"
+          label: "Gradient End Color"
         },
         gradientDirection: {
           type: "select",
-          label: "Gradient Direction (None Type)",
+          label: "Gradient Direction",
           options: [
             { label: "Left to Right", value: "to right" },
             { label: "Right to Left", value: "to left" },
@@ -86,69 +81,14 @@ export const config: Config<Props> = {
             { label: "Diagonal ↖", value: "to top left" },
           ]
         },
-        // Galaxy settings
-        mouseRepulsion: {
-          type: "select",
-          options: [
-            { label: "True", value: true },
-            { label: "False", value: false },
-          ],
-          label: "Mouse Repulsion (Galaxy)"
-        },
-        mouseInteraction: {
-          type: "select",
-          options: [
-            { label: "True", value: true },
-            { label: "False", value: false },
-          ],
-          label: "Mouse Interaction (Galaxy)"
-        },
-        density: { 
-          type: "number", 
-          label: "Density (Galaxy)"
-        },
-        glowIntensity: { 
-          type: "number", 
-          label: "Glow Intensity (Galaxy)"
-        },
-        saturation: { 
-          type: "number", 
-          label: "Saturation (Galaxy)"
-        },
-        hueShift: { 
-          type: "number", 
-          label: "Hue Shift (Galaxy)"
-        },
-        // Particles settings
-        particleCount: { 
-          type: "number", 
-          label: "Particle Count (Particles)"
-        },
-        particleSpeed: { 
-          type: "number", 
-          label: "Particle Speed (Particles)"
-        },
-        particleSize: { 
-          type: "number", 
-          label: "Particle Size (Particles)"
-        },
       },
       defaultProps: {
-        type: "galaxy",
+        type: "none",
         backgroundColor: "#000000",
         gradient: false,
         gradientStart: "#3b82f6",
         gradientEnd: "#8b5cf6",
         gradientDirection: "to right",
-        mouseRepulsion: true,
-        mouseInteraction: true,
-        density: 1.5,
-        glowIntensity: 0.5,
-        saturation: 0.8,
-        hueShift: 240,
-        particleCount: 100,
-        particleSpeed: 0.1,
-        particleSize: 100,
       },
       render: ({
         type,
@@ -157,35 +97,18 @@ export const config: Config<Props> = {
         gradientStart,
         gradientEnd,
         gradientDirection,
-        mouseRepulsion,
-        mouseInteraction,
-        density,
-        glowIntensity,
-        saturation,
-        hueShift,
-        particleCount,
-        particleSpeed,
-        particleSize,
       }) => {
         // Create background style based on type
         let backgroundStyle = {};
-        
-        if (type === "none") {
-          if (gradient) {
-            backgroundStyle = {
-              background: `linear-gradient(${gradientDirection}, ${gradientStart}, ${gradientEnd})`,
-            };
-          } else {
-            backgroundStyle = {
-              backgroundColor: backgroundColor || "#000000",
-            };
-          }
+        if (gradient) {
+          backgroundStyle = {
+            background: `linear-gradient(${gradientDirection}, ${gradientStart}, ${gradientEnd})`,
+          };
         } else {
           backgroundStyle = {
-            backgroundColor: "#000",
+            backgroundColor: backgroundColor || "#000000",
           };
         }
-
         return (
           <div
             style={{
@@ -193,62 +116,10 @@ export const config: Config<Props> = {
               width: "100%",
               minHeight: "100vh",
               overflow: "visible",
-              pointerEvents: "none", // Allow clicks to pass through to content
+              pointerEvents: "none",
               ...backgroundStyle,
             }}
           >
-            {type === "galaxy" && (
-              <Galaxy
-                mouseRepulsion={mouseRepulsion ?? false}
-                mouseInteraction={mouseInteraction ?? false}
-                density={density ?? 1.5}
-                glowIntensity={glowIntensity ?? 0.5}
-                saturation={saturation ?? 0.8}
-                hueShift={hueShift ?? 240}
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  zIndex: 0,
-                  backgroundColor: "#000",
-                  pointerEvents: "none",
-                }}
-              />
-            )}
-
-            {type === "particles" && (
-              <div 
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  zIndex: 0,
-                  width: "100%",
-                  height: "100%",
-                  pointerEvents: "none",
-                }}
-              >
-                <Particles
-                  particleCount={particleCount ?? 100}
-                  particleSpread={10}
-                  speed={particleSpeed ?? 0.1}
-                  particleColors={["#ffffff", "#ffffff", "#ffffff"]}
-                  moveParticlesOnHover={true}
-                  particleHoverFactor={1}
-                  alphaParticles={false}
-                  particleBaseSize={particleSize ?? 100}
-                  sizeRandomness={0.5}
-                  cameraDistance={10}
-                  disableRotation={false}
-                  className=""
-                />
-              </div>
-            )}
-
             <DropZone
               zone="background-content"
               style={{
@@ -262,7 +133,7 @@ export const config: Config<Props> = {
                 gap: "20px",
                 width: "100%",
                 minHeight: "100vh",
-                pointerEvents: "auto", // Allow interactions with content
+                pointerEvents: "auto",
               }}
             />
           </div>
